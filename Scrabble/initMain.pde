@@ -22,3 +22,4 @@ void generateMainGrid() {
   mainGrid[middle][middle].setStar();
   mainGrid[middle][middle].cellColor=color(#F0B3A7);
 }
+//

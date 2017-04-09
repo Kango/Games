@@ -39,6 +39,9 @@ void generateAllLetters() {
   //
   //  println(allLetters);
 
+  // for testing the end of game: 
+  // allLetters = generateXLetters("A", 2);
+
   allLetters =  shuffleArray ( allLetters.toCharArray() );
 
   // println(allLetters);

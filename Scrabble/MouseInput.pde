@@ -5,13 +5,13 @@ void mousePressed() {
 
   // check 2 buttons 
   if ( button0.mouseOver() &&  whichPlayersMove == 0  ) {
-    placeLetterOnMainGrid(letterStackLeft, pointsLeft);
+    placeLetterOnMainGrid(letterStackLeft, whichPlayersMove);
     // fill up stones   
-    steineErgaenzen (letterStackLeft);
+    fillUpLetterStack (letterStackLeft);
     if (stateInputLeft==Phase2||stateInputLeft==DrawLetters) {
       whichPlayersMove = 1; // change player
-      button0.farbe=GRAY;
-      button1.farbe=GREEN;
+      button0.colorButton=GRAY;
+      button1.colorButton=GREEN;
       stateInputLeft=Phase1;
       button0.text1="Finish move";
     } else 
@@ -21,13 +21,13 @@ void mousePressed() {
     }
     return; // hard exit
   } else if ( button1.mouseOver() && whichPlayersMove == 1 ) {
-    placeLetterOnMainGrid(letterStackRight, pointsRight);
-   // fill up stones
-    steineErgaenzen(letterStackRight);
+    placeLetterOnMainGrid(letterStackRight, whichPlayersMove);
+    // fill up stones
+    fillUpLetterStack(letterStackRight);
     if (stateInputRight==Phase2||stateInputRight==DrawLetters) {
       whichPlayersMove = 0; // change player
-      button0.farbe=GREEN;
-      button1.farbe=GRAY;
+      button0.colorButton=GREEN;
+      button1.colorButton=GRAY;
       stateInputRight=Phase1;
       button1.text1="Finish move";
     } else 

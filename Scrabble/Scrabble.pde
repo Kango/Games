@@ -1,9 +1,6 @@
 //
 //  Scrabble
-//  6th April 2017
-
-// main game board: number of cells 
-final int max1=15;
+//  Version 9th April 2017
 
 // colors as consts
 final color GRAY = color(111); 
@@ -11,9 +8,16 @@ final color GREEN = color(0, 255, 0);
 final color RED = color(255, 0, 0);
 final color YELLOW = color(#FEFF15);
 
+// main game board: number of cells 
+final int max1=15;
+
 // 2D Array of class 'Cell': 
 // main game board 
 Cell[][] mainGrid  = new Cell[max1][max1]; // empty Array
+
+final int normalGame = 0; 
+final int gameOver = 1; 
+int state=normalGame; 
 
 // these are the letters the 2 players hold on their hand / have before them 
 Cell[] letterStackLeft    = new Cell[8]; 
@@ -35,13 +39,13 @@ String allLetters;
 // from which pos in the heap are we drawing new letters? 
 int allLettersPosition=0;
 
-// some other vars 
+// some other vars: a state system for the players   
 final int DrawLetters=0;  
 final int Phase1=1;
 final int Phase2=2;
 
-int stateInputLeft=DrawLetters;
-int stateInputRight=DrawLetters; 
+int stateInputLeft  = DrawLetters;
+int stateInputRight = DrawLetters; 
 
 // player scores 
 int pointsLeft, pointsRight;
@@ -49,10 +53,15 @@ int pointsLeft, pointsRight;
 // the score of the letters (how much is one letter worth)
 HashMap<String, Integer>  hashMapPointsOfLetter = new HashMap<String, Integer> ();  
 
-// ---------------------------------------------------
+// for showing the table of results 
+String scoreTable=""; 
+ScoreTable[] scoreTables = new ScoreTable[2]; 
+
+// ----------------------------------------------------------------
 
 void setup () {
   size (920, 940);
+  textSize(22); 
 
   // generate Main Grid
   generateMainGrid(); 
@@ -76,10 +85,16 @@ void setup () {
   // Button init 
   button0 = new Button ( "Draw Letters", 172, height-120, GREEN);  
   button1 = new Button ( "Draw Letters", width-172, height-120, GRAY);
+
+  // ScoreTable init
+  scoreTables[0]=new ScoreTable(20, 250, 100, 320, 0); 
+  scoreTables[1]=new ScoreTable(width-120, 250, 100, 320, 1);
+
+  background (90);
 }
 
 void draw () {
-  background (111);
+  background (90);
 
   // buttons
   button0.display(); 
@@ -95,29 +110,21 @@ void draw () {
   // when we drag one letter 
   draggingALetter(); 
 
-  // letters letterStack left 
-  for (int i=0; i<8; i++) {
-    letterStackLeft[i].display();
+  // show both letter stacks below
+  showLetterStacks();
+
+  // show Minor Stuff on the screen 
+  showMinorStuff();
+
+  // Game over? 
+  checkGameOver();
+
+  // display message
+  if (state == gameOver) {
+    //
+    fill(RED);
+    text ( "Game Over", width/2, height-133 );
   }
-
-  // letters letterStack right 
-  for (int i=0; i<8; i++) {
-    letterStackRight[i].display();
-  }
-
-  // Lines letterStack
-  showLinesAroundLetterStack( letterStackLeft, 0 ); // 0 says: letterStack Left 
-
-  // Lines letterStack
-  showLinesAroundLetterStack( letterStackRight, 1 ); // 1 means: letterStack Right
-
-  // display quantity remaining letters in the Heap  (upper right corner)
-  fill(255);
-  text(allLetters.length() - allLettersPosition, width-66, 66);
-
-  // points players 
-  fill(255);
-  text(pointsLeft, 30, height-120); 
-  text(pointsRight, width - 30, height-120);
-}
+  //
+}//func 
 //

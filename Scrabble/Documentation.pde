@@ -2,10 +2,13 @@
 // SEE https://en.wikipedia.org/wiki/Scrabble
 // 
 // Definitions : 
+// Scrabble is a game for 2 players. No AI. 
+//
 // two players play each other: player left (0) and player (right).
-// A HEAP holds all letters. Both take letters from the heap and hold
+// A HEAP (allLetters) holds all letters. Both take letters from the heap and hold
 // 8 on their hand (called letterStack). 
-// They can place letter with the mouse (drag drop) on the game board (main grid).
+
+// They can place letter with the mouse (drag drop) on the game board ("mainGrid").
 // Afterwards the need to confirm by clicking a button. 
 
 // They can place the letters also ***below the board to test out words.

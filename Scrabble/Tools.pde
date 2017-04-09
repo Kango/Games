@@ -1,10 +1,78 @@
 
+// minor tools 
 
-void showLinesAroundLetterStack( Cell[] c, int linkeLine   ) {
+void checkGameOver() {
+
+  int conditionsCounter = 0; 
+
+  if (allLettersPosition >= allLetters.length()) {
+    conditionsCounter++;
+  }
+
+  if (isLetterStackEmpty(letterStackLeft)) {
+    conditionsCounter++;
+  }
+
+  if (isLetterStackEmpty(letterStackRight)) {
+    conditionsCounter++;
+  }
+
+  if (conditionsCounter>=3) 
+    state=gameOver;
+}//func 
+
+boolean isLetterStackEmpty (Cell[] letterStack) {
+  // 
+  for (int i=0; i<8; i++) {
+    if (letterStack[i].exist) {
+      return false;
+    }
+  }//for 
+  // all were not existing: 
+  return true;
+}
+
+void showLetterStacks() {
+
+  // letters letterStack left 
+  for (int i=0; i<8; i++) {
+    letterStackLeft[i].display();
+  }
+
+  // letters letterStack right 
+  for (int i=0; i<8; i++) {
+    letterStackRight[i].display();
+  }
+
+  // Lines letterStack
+  showLinesAroundLetterStack( letterStackLeft, 0 ); // 0 says: letterStack Left 
+
+  // Lines letterStack
+  showLinesAroundLetterStack( letterStackRight, 1 ); // 1 means: letterStack Right
+}
+
+void showMinorStuff() {
+
+  // display quantity remaining letters in the Heap  (upper right corner)
+  fill(255);
+  text(allLetters.length() - allLettersPosition, width-66, 66);
+
+  // display points players 
+  fill(255);
+  text(pointsLeft, 30, height-120); 
+  text(pointsRight, width - 30, height-120);
+
+  // display score tables 
+  for (int i = 0; i<scoreTables.length; i++) {  
+    scoreTables[i].display();
+  }//for
+}
+
+void showLinesAroundLetterStack( Cell[] c, int leftLine   ) {
 
   // lines
 
-  if ( whichPlayersMove == linkeLine ) 
+  if ( whichPlayersMove == leftLine ) 
     stroke (GREEN); 
   else 
   stroke(GRAY); 
@@ -27,9 +95,9 @@ void showLinesAroundLetterStack( Cell[] c, int linkeLine   ) {
 }
 
 void draggingALetter() {
-  
+
   // while dragging
-  
+
   if (hold) {
     if ( whichPlayersMove == 0 ) {
       letterStackLeft[holding].x=mouseX;

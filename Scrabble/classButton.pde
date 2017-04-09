@@ -1,31 +1,32 @@
 
 
 class Button {
-  
+
   // 2 green buttons for the players
 
-  String text1;
   float x, y; 
-  color farbe; 
+  String text1;
+  color colorButton; 
 
   // constr
   Button(String textTemp, 
     float xTemp, float yTemp, 
-    color farbeTemp) {
+    color colorButtonTemp) {
     text1 = textTemp;
     x     = xTemp;
     y     = yTemp;
-    farbe = farbeTemp;
+    colorButton = colorButtonTemp;
   }
 
   void display() {
-    fill(farbe);
+    fill(colorButton);
     textSize(18); 
+    textAlign(CENTER); 
     text(text1, x, y);
   }
 
   boolean mouseOver() {
-    // ein gedachter Kasten um die Button
+    // think of a rect around the buttons: 
     return mouseX>x-190 &&
       mouseY>y-30&&
       mouseX<x+210 &&

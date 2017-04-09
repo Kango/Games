@@ -11,7 +11,7 @@ void testLetterStackAgainstMouse(Cell[] letterStack) {
   }
 } 
 
-void steineErgaenzen (Cell[] letterStack) {
+void fillUpLetterStack (Cell[] letterStack) {
   // fill up the stones on letter stack
   for (int i=0; i<8; i++) {
     if (!letterStack[i].exist) {
@@ -19,43 +19,20 @@ void steineErgaenzen (Cell[] letterStack) {
       if (allLettersPosition < allLetters.length()) {
         letterStack[i].cellLetter = allLetters.charAt(allLettersPosition); 
         allLettersPosition++;
+      } else {
+        letterStack[i].exist=false;
       }
       letterStack[i].setBackToOriginalPosition();
     }
   }
 }
 
-void placeLetterOnMainGrid(Cell[] letterStack, int whichPlayersMove) {
-
-  // with the mouse we lay a letter to the main grid above
-
-  for (int iLetterStack=0; iLetterStack<8; iLetterStack++) {
-
-    for (int i2=0; i2<max1; i2++) {
-      for (int i=0; i<max1; i++) {
-
-        if ( mainGrid[i2][i].near(letterStack[iLetterStack]) ) {
-          mainGrid[i2][i].copyFrom(letterStack[iLetterStack]); // copy
-
-          int value1 = hashMapPointsOfLetter.get(letterStack[iLetterStack].cellLetter+"");
-          println (letterStack[iLetterStack].cellLetter+ ": "+value1);
-          if (whichPlayersMove==0) 
-            pointsLeft += value1;
-          else pointsRight += value1;
-          //
-          letterStack[iLetterStack].exist = false;
-          letterStack[iLetterStack].docked = false; 
-          // return;
-        }// if
-      }
-    }
-  }
-} // func
-
 void placeLetterOnMainGridTest(Cell[] letterStack) {
 
+  // place letters temporarily so the player can still move them 
+
   // with the mouse we lay a letter to the main grid
-  // above (test)
+  // above (player can lay this temporarily)
 
   letterStack[holding].docked=false; 
 
@@ -63,11 +40,63 @@ void placeLetterOnMainGridTest(Cell[] letterStack) {
     for (int i=0; i<max1; i++) {
 
       if ( mainGrid[i2][i].near(letterStack[holding]) ) {
-        //  mainGrid[i2][i].copyFrom(letterStack[holding]); // copy
         letterStack[holding].docked = true;
         return;
       }// if
     }
   }
+} // func
+
+void placeLetterOnMainGrid(Cell[] letterStack, int whichPlayersMove) {
+
+  // place letters finally for good 
+
+  // with the mouse we lay a letter to the main grid above
+
+  // ArrayList holds the positions on the main grid as x,y for all placed letters
+  ArrayList<PVectorInt> listOfIndexes = new ArrayList();  
+
+  // compare each letter from player to entire grid
+
+  for (int iLetterStack=0; iLetterStack<8; iLetterStack++) {
+
+    // compare each letter from player to entire grid 
+    for (int i2=0; i2<max1; i2++) {
+      for (int i=0; i<max1; i++) {
+
+        if ( mainGrid[i2][i].near(letterStack[iLetterStack]) ) {
+
+          mainGrid[i2][i].copyFrom(letterStack[iLetterStack]); // copy
+
+          // add to list 
+          listOfIndexes.add(new PVectorInt(i2, i)); 
+
+          //remove from letterStack 
+          letterStack[iLetterStack].exist = false;
+          letterStack[iLetterStack].docked = false; 
+          // return;
+        }// if
+      }
+    }
+  } // for 
+
+  // all letters are put to the grid;
+  // now calculate the score 
+  calculateScore(listOfIndexes);  // calculate score   
+
+  // set score table 
+  if (whichPlayersMove==0) {
+    scoreTables[0].isActive=true; 
+    if (scoreTable.length()>0)
+      scoreTables[0].setText(scoreTable);
+  } else if (whichPlayersMove==1) {
+    scoreTables[1].isActive=true;
+    if (scoreTable.length()>0)
+      scoreTables[1].setText(scoreTable);
+  } else {
+    println ("Error 91");
+    exit();
+  }//else 
+  //
 } // func
 //
