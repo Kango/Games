@@ -6,7 +6,7 @@ void generateMainGrid() {
   // main game board  
   for (int x=0; x<max1; x++) {
     for (int y=0; y<max1; y++) {
-      mainGrid[x][y] = new Cell (40*x+140, y*40+44, GREEN, true);
+      mainGrid[x][y] = new Cell (40*x+12, y*40+12, GREEN, true);
     }
   }
 

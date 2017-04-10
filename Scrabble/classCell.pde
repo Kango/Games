@@ -35,6 +35,7 @@ class Cell {
   Cell (float theX, float theY, 
     color theColor, 
     boolean theExist) {
+
     x = theX;
     y = theY;
 
@@ -85,7 +86,8 @@ class Cell {
   }
 
   boolean near(Cell other) {
-    float distToOther = dist(x, y, other.x, other.y); 
+    float distToOther = dist(x, y, 
+      other.x, other.y); 
     return distToOther < 18; // or 29 threshold
   }
 

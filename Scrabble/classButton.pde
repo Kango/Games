@@ -19,18 +19,27 @@ class Button {
   }
 
   void display() {
-    fill(colorButton);
-    textSize(18); 
-    textAlign(CENTER); 
-    text(text1, x, y);
+    if (colorButton != BLACK) {
+      pushStyle();
+      strokeWeight(2);
+      stroke(255);
+      fill(BLACK);
+      rectMode(CENTER);
+      rect(x, y, 300, 40, 5);
+      fill(colorButton);
+      textSize(22); 
+      textAlign(CENTER); 
+      text(text1, x, y + 5);
+      popStyle();
+    }
   }
 
   boolean mouseOver() {
     // think of a rect around the buttons: 
-    return mouseX>x-190 &&
-      mouseY>y-30&&
-      mouseX<x+210 &&
-      mouseY<y+30;
+    return mouseX>x-140 &&
+      mouseY>y-20&&
+      mouseX<x+160 &&
+      mouseY<y+20;
   }// sub routine
   //
 }// class 

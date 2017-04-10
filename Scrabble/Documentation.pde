@@ -17,7 +17,7 @@
 
 //
 // GERMAN Scrabble Points / Score  
-// (in brackets how many stones).
+// (Number of stones in brackets).
 // https://de.wikipedia.org/wiki/Scrabble
 //
 //    1 Punkt: E (15), N (9), S (7), I (6), R (6), T (6), U (6), A (5), D (4)
@@ -31,5 +31,16 @@
 //    0 Punkte: Joker/Blanko (2)
 //
 //
+// ENGLISH Scrabble Points / Score
+// (Number of stones in brackets)
+// Source - my set of Scrabble :) (@Lord_of_the_Galaxy)
 //
-//
+//    1 Point   : E (12), A (9), I (9), O (8), N (6), R (6), T (6), U (4), S (4), L (4)
+//    2 Points  : G (3), D (4)
+//    3 Points  : M (2), B (2), C (2), P (2)
+//    4 Points  : H (2), F (2), V (2), W (2), Y (2)
+//    5 Points  : K (1)
+//    8 Points  : J (1), X (1)
+//    10 Points : Q (1), Z (1)
+// 
+//    0 Points  : Joker/Blank (2)

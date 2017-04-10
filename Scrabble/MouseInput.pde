@@ -3,14 +3,19 @@
 
 void mousePressed() {
 
+  if (state==startScreen) {
+    state=normalGame; 
+    return;
+  }//if
+
   // check 2 buttons 
   if ( button0.mouseOver() &&  whichPlayersMove == 0  ) {
-    placeLetterOnMainGrid(letterStackLeft, whichPlayersMove);
+    placeLetterOnMainGrid(letterStack1, whichPlayersMove);
     // fill up stones   
-    fillUpLetterStack (letterStackLeft);
+    fillUpLetterStack (letterStack1);
     if (stateInputLeft==Phase2||stateInputLeft==DrawLetters) {
       whichPlayersMove = 1; // change player
-      button0.colorButton=GRAY;
+      button0.colorButton=BLACK;
       button1.colorButton=GREEN;
       stateInputLeft=Phase1;
       button0.text1="Finish move";
@@ -21,13 +26,13 @@ void mousePressed() {
     }
     return; // hard exit
   } else if ( button1.mouseOver() && whichPlayersMove == 1 ) {
-    placeLetterOnMainGrid(letterStackRight, whichPlayersMove);
+    placeLetterOnMainGrid(letterStack2, whichPlayersMove);
     // fill up stones
-    fillUpLetterStack(letterStackRight);
+    fillUpLetterStack(letterStack2);
     if (stateInputRight==Phase2||stateInputRight==DrawLetters) {
       whichPlayersMove = 0; // change player
       button0.colorButton=GREEN;
-      button1.colorButton=GRAY;
+      button1.colorButton=BLACK;
       stateInputRight=Phase1;
       button1.text1="Finish move";
     } else 
@@ -43,9 +48,9 @@ void mousePressed() {
   // check stones in letterStack against mouse 
   // (begin of drag and drop) 
   if ( whichPlayersMove == 0 ) {
-    testLetterStackAgainstMouse(letterStackLeft);
+    testLetterStackAgainstMouse(letterStack1);
   } else if ( whichPlayersMove == 1 ) {
-    testLetterStackAgainstMouse(letterStackRight);
+    testLetterStackAgainstMouse(letterStack2);
   } //else
 }// func 
 
@@ -56,10 +61,10 @@ void mouseReleased() {
   hold=false;
 
   if ( whichPlayersMove == 0 ) {
-    placeLetterOnMainGridTest(letterStackLeft);
+    placeLetterOnMainGridTest(letterStack1);
   }//if
   else if ( whichPlayersMove == 1 ) {
-    placeLetterOnMainGridTest(letterStackRight);
+    placeLetterOnMainGridTest(letterStack2);
   }//else
 }//sub routine
 //

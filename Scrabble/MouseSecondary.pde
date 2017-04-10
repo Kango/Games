@@ -16,16 +16,22 @@ void fillUpLetterStack (Cell[] letterStack) {
   for (int i=0; i<8; i++) {
     if (!letterStack[i].exist) {
       letterStack[i].exist=true;
+      // we try to replace the letter from Heap
       if (allLettersPosition < allLetters.length()) {
+        // get from Heap
         letterStack[i].cellLetter = allLetters.charAt(allLettersPosition); 
-        allLettersPosition++;
+        allLettersPosition++; // increase pos in heap
       } else {
+        // no letter in Heap left, set exist to false in letter stack 
         letterStack[i].exist=false;
       }
       letterStack[i].setBackToOriginalPosition();
-    }
-  }
-}
+    }//if
+    else {
+      letterStack[i].setBackToOriginalPosition();
+    }//else
+  }//for
+}//func 
 
 void placeLetterOnMainGridTest(Cell[] letterStack) {
 
@@ -68,16 +74,16 @@ void placeLetterOnMainGrid(Cell[] letterStack, int whichPlayersMove) {
 
           mainGrid[i2][i].copyFrom(letterStack[iLetterStack]); // copy
 
-          // add to list 
+          // add to list of main grid positions 
           listOfIndexes.add(new PVectorInt(i2, i)); 
 
           //remove from letterStack 
           letterStack[iLetterStack].exist = false;
           letterStack[iLetterStack].docked = false; 
           // return;
-        }// if
-      }
-    }
+        } // if
+      } // for
+    } // for
   } // for 
 
   // all letters are put to the grid;

@@ -45,7 +45,7 @@ void normalScoring (ArrayList<PVectorInt> listOfIndexes, boolean oneLetter) {
       done = false; 
     if (done) {
       for (int i=xStart; i <= xEnd; i++) {
-        int value1 = hashMapPointsOfLetter.get(mainGrid[i][currentPV1.y].cellLetter+"");
+        int value1 = pointsOfLetter.get(mainGrid[i][currentPV1.y].cellLetter+"");
         scoreTableAdd( mainGrid[i][currentPV1.y].cellLetter, value1 ) ;
         addScore ( value1, whichPlayersMove );
       }
@@ -59,12 +59,12 @@ void normalScoring (ArrayList<PVectorInt> listOfIndexes, boolean oneLetter) {
     yStart = extendVerticallyUp(yStart, currentPV1);
     yEnd = extendVerticallyDown(yEnd, currentPV1);
     for (int i=yStart; i <= yEnd; i++) {
-      int value1 = hashMapPointsOfLetter.get(mainGrid[currentPV1.x][i].cellLetter+"");
+      int value1 = pointsOfLetter.get(mainGrid[currentPV1.x][i].cellLetter+"");
       scoreTableAdd(mainGrid[currentPV1.x][i].cellLetter, value1);
       addScore ( value1, whichPlayersMove );
     }
   } else { 
-    // int value1 = hashMapPointsOfLetter.get(letterStack[iLetterStack].cellLetter+"");
+    // int value1 = pointsOfLetter.get(letterStack[iLetterStack].cellLetter+"");
     // println (letterStack[iLetterStack].cellLetter+ ": "+value1);
     println ("Error 84");
   }
@@ -146,7 +146,7 @@ int neighbourLetter(PVectorInt currentPVOriginal) {
   currentPV.x--;
   if ( isOK(currentPV) ) {
     if (mainGrid[currentPV.x][currentPV.y].cellLetter!=' ') {
-      value1 += hashMapPointsOfLetter.get(mainGrid[currentPV.x][currentPV.y].cellLetter+"");
+      value1 += pointsOfLetter.get(mainGrid[currentPV.x][currentPV.y].cellLetter+"");
       scoreTableAdd ( mainGrid[currentPV.x][currentPV.y].cellLetter, value1 );
     }
   }
@@ -155,7 +155,7 @@ int neighbourLetter(PVectorInt currentPVOriginal) {
   currentPV.x++;
   if ( isOK(currentPV) ) {
     if (mainGrid[currentPV.x][currentPV.y].cellLetter!=' ') {
-      value1 += hashMapPointsOfLetter.get(mainGrid[currentPV.x][currentPV.y].cellLetter+"");
+      value1 += pointsOfLetter.get(mainGrid[currentPV.x][currentPV.y].cellLetter+"");
       println (mainGrid[currentPV.x][currentPV.y].cellLetter+ ": "+value1);
     }
   }
@@ -166,7 +166,7 @@ int neighbourLetter(PVectorInt currentPVOriginal) {
   currentPV.y--;
   if ( isOK(currentPV) ) {
     if (mainGrid[currentPV.x][currentPV.y].cellLetter!=' ') {
-      value1 += hashMapPointsOfLetter.get(mainGrid[currentPV.x][currentPV.y].cellLetter+"");
+      value1 += pointsOfLetter.get(mainGrid[currentPV.x][currentPV.y].cellLetter+"");
       println (mainGrid[currentPV.x][currentPV.y].cellLetter+ ": "+value1);
     }
   }
@@ -175,7 +175,7 @@ int neighbourLetter(PVectorInt currentPVOriginal) {
   currentPV.y++;
   if ( isOK(currentPV) ) {
     if (mainGrid[currentPV.x][currentPV.y].cellLetter!=' ') {
-      value1 += hashMapPointsOfLetter.get(mainGrid[currentPV.x][currentPV.y].cellLetter+"");
+      value1 += pointsOfLetter.get(mainGrid[currentPV.x][currentPV.y].cellLetter+"");
       println (mainGrid[currentPV.x][currentPV.y].cellLetter+ ": "+value1);
     }
   }
